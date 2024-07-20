@@ -1,0 +1,16 @@
+{
+  "removeNull": {
+    "ui:options": {
+      "titleInlineStyle": {
+        "minWidth": 220
+      }
+    }
+  },
+  "removeEmpty": {
+    "ui:options": {
+      "titleInlineStyle": {
+        "minWidth": 220
+      }
+    }
+  }
+}
