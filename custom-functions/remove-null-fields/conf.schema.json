@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "removeNull": {
+      "type": "boolean",
+      "title": "Remove fields with null values",
+      "description": "Option to remove fields that have `null` values",
+      "default": false
+    },
+    "removeEmpty": {
+      "type": "boolean",
+      "title": "Remove fields with empty values",
+      "description": "Option to remove fields that are empty (i.e., have a length of zero or are empty strings)",
+      "default": false
+    }
+  }
+}
