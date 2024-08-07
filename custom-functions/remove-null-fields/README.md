@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `remove-null-fields` function is designed to clean up events by removing fields that are either null or empty. (Except "_raw", "_time", "__*")
+The `remove-null-fields` function is designed to clean up events by removing fields that are either null or empty. (Except `_raw`, `_time`, `__*`)
 
 ## Features
 
@@ -30,6 +30,7 @@ The benchmark sample below demonstrates that using the Parser Function with the 
 - **Cribl Stream Version/Build**: `4.7.3-6f48361f`
 - **AWS Instance Type**: `c7g.large`
 
+**Results (tl;dr):**
 - **Parser Function with Built-in Removal**: `117676.96ms`
 - **Parser Function + Remove Null Fields Function**: `3042.37ms`
 
