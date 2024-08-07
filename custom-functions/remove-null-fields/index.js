@@ -109,13 +109,14 @@ exports.process = (event) => {
   // Iterate over each key in the event object.
   for (const key in event) {
     // Ignore internal fields, such as Cribl fields and other fields starting with "__".
-    if (key.startsWith("__") || key === "_time" || key === "_raw") {
+    if (key === "_raw" || key === "_time" || key.startsWith("__")) {
       continue;
     }
 
     // If the shouldRemove callback returns true for the current field, set the field to undefined.
     if (shouldRemove.field(event[key])) {
       event[key] = undefined;
+      continue;
     }
   }
 

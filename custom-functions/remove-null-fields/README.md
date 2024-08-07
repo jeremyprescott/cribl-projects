@@ -32,7 +32,7 @@ The benchmark sample below demonstrates that using the Parser Function with the 
 
 **Results (tl;dr):**
 - **Parser Function with Built-in Removal**: `117676.96ms`
-- **Parser Function + Remove Null Fields Function**: `3042.37ms`
+- **Parser Function + Remove Null Fields Function**: `3049.24ms`
 
 ### Sample Event
 
@@ -77,7 +77,7 @@ $ cat /opt/sample_events/100_000.json | /opt/cribl/bin/cribl pipe -t -p ParserFu
 - **Remove fields with null values**: `True`
 - **Remove fields with empty values**: `True`
 
-Running a sample file with `100,000` events through the Parser Function and the `remove-null-fields` function took **`3042.37ms`**:
+Running a sample file with `100,000` events through the Parser Function and the `remove-null-fields` function took **`3049.24ms`**:
 
 ```shell
 $ cat /opt/sample_events/100_000.json | /opt/cribl/bin/cribl pipe -t -p ParserAndRemoveNullFunction 2>/dev/null
@@ -86,7 +86,7 @@ $ cat /opt/sample_events/100_000.json | /opt/cribl/bin/cribl pipe -t -p ParserAn
         {
             "bytesIn": 181200000,
             "bytesOut": 317800000,
-            "duration": 2396.6148200142197, // woahhhhhh
+            "duration": 2417.076120394282, // woahhhhhh
             "eventsIn": 100000,
             "eventsOut": 100000,
             "func": "serde"
@@ -94,7 +94,7 @@ $ cat /opt/sample_events/100_000.json | /opt/cribl/bin/cribl pipe -t -p ParserAn
         {
             "bytesIn": 317800000,
             "bytesOut": 237000000,
-            "duration": 645.7600999730639,   // sheeeeeeeesh
+            "duration": 632.159029004164,   // sheeeeeeeesh
             "eventsIn": 100000,
             "eventsOut": 100000,
             "func": "remove-null-fields"
