@@ -1,6 +1,6 @@
 {
   "name": "remove-null-fields",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The `remove-null-fields` function is designed to clean up events by removing non-internal fields (fields that do not start with `__`) that are either null or empty.",
   "main": "index.js",
   "author": "Jeremy Prescott",

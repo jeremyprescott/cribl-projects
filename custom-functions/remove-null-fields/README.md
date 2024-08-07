@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `remove-null-fields` function is designed to clean up events by removing non-internal fields (fields that do not start with `__`) that are either null or empty.
+The `remove-null-fields` function is designed to clean up events by removing fields that are either null or empty. (Except "_raw", "_time", "__*")
 
 ## Features
 
@@ -26,8 +26,12 @@ The `remove-null-fields` function, on the other hand, directly traverses each ke
 
 The benchmark sample below demonstrates that using the Parser Function with the built-in `Fields Filter Expression` to remove empty and null fields is more expensive compared to using the Parser Function without removal and the `remove-null-fields` function.
 
-- **Parser Function with Built-in Removal**: `60656.60ms`
-- **Parser Function + Remove Null Fields Function**: `2029.45ms`
+**Test System:**
+- **Cribl Stream Version/Build**: `4.7.3-6f48361f`
+- **AWS Instance Type**: `c7g.large`
+
+- **Parser Function with Built-in Removal**: `117676.96ms`
+- **Parser Function + Remove Null Fields Function**: `3042.37ms`
 
 ### Sample Event
 
@@ -43,16 +47,16 @@ The benchmark sample below demonstrates that using the Parser Function with the 
 - **Source Field**: `_raw`
 - **Fields Filter Expression**: `value != '' && value != null`
 
-Running a sample file with `100,000` events through the Parser Function took **`60656.60ms`**:
+Running a sample file with `100,000` events through the Parser Function took **`117676.96ms`**:
 
 ```shell
-root@c8717a691e47:/opt/cribl/bin# cat /opt/sample_events/100_000.json | ./cribl pipe -t -p ParserFunction 2>/dev/null
+$ cat /opt/sample_events/100_000.json | /opt/cribl/bin/cribl pipe -t -p ParserFunction 2>/dev/null
 {
     "functions": [
         {
             "bytesIn": 181200000,
             "bytesOut": 237000000,
-            "duration": 60656.60946440697,  // oof
+            "duration": 117676.9628769923,  // oof
             "eventsIn": 100000,
             "eventsOut": 100000,
             "func": "serde"
@@ -72,16 +76,16 @@ root@c8717a691e47:/opt/cribl/bin# cat /opt/sample_events/100_000.json | ./cribl 
 - **Remove fields with null values**: `True`
 - **Remove fields with empty values**: `True`
 
-Running a sample file with `100,000` events through the Parser Function and the `remove-null-fields` function took **`2029.45ms`**:
+Running a sample file with `100,000` events through the Parser Function and the `remove-null-fields` function took **`3042.37ms`**:
 
 ```shell
-root@c8717a691e47:/opt/cribl/bin# cat /opt/sample_events/100_000.json | ./cribl pipe -t -p ParserAndRemoveNullFunction 2>/dev/null
+$ cat /opt/sample_events/100_000.json | /opt/cribl/bin/cribl pipe -t -p ParserAndRemoveNullFunction 2>/dev/null
 {
     "functions": [
         {
             "bytesIn": 181200000,
             "bytesOut": 317800000,
-            "duration": 1480.4773395061493, // woahhhhhh
+            "duration": 2396.6148200142197, // woahhhhhh
             "eventsIn": 100000,
             "eventsOut": 100000,
             "func": "serde"
@@ -89,7 +93,7 @@ root@c8717a691e47:/opt/cribl/bin# cat /opt/sample_events/100_000.json | ./cribl 
         {
             "bytesIn": 317800000,
             "bytesOut": 237000000,
-            "duration": 548.982625246048,   // sheeeeeeeesh
+            "duration": 645.7600999730639,   // sheeeeeeeesh
             "eventsIn": 100000,
             "eventsOut": 100000,
             "func": "remove-null-fields"
